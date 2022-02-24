@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Barriecito&family=Gloria+Hallelujah&family=Redressed&family=Shizuru&display=swap');
+
+    .Message {
+        font-family: 'Redressed', cursive;
+        position: relative;
+
+    }
+
+    .vid-bg {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -1;
+    }
+
+    .dice {
+        text-align: center;
+        display: inline-block;
+        margin-top: 60px;
+        position: relative;
+        width: 270px;
+        height: 270px;
+    }
+
+    .btn {
+
+        margin-left: 40%;
+        align-content: center;
+        background: #a90000;
+        font-family: 'Gloria Hallelujah', cursive;
+        border-radius: 45px;
+        color: #ffff;
+        font-size: 30px;
+        padding: 12px 25px 14px 25px;
+        text-decoration: none;
+        position: absolute;
+        width: 20%;
+    }
+
+    .head {
+        position: relative;
+        font-family: 'Barriecito', cursive;
+        text-align: center;
+        font-size: 50px;
+        color: #e01a11;
+    }
+
+    .img1 {
+        height: 147px;
+        margin-left: 424px
+    }
+
+    .Guess1 {
+        font-family: 'Redressed', cursive;
+        margin-left: 443px;
+        width: 100px;
+        font-size: 26px;
+        font-weight: bold;
+        background-color: #e01a11;
+        color: white;
+        margin-top: 3px;
+    }
+
+    .img2 {
+        height: 147px;
+        margin-left: 404px
+    }
+
+    .Guess2 {
+        font-family: 'Redressed', cursive;
+        margin-left: 426px;
+        width: 100px;
+        font-size: 26px;
+        font-weight: bold;
+        background-color: #e01a11;
+        color: white;
+        margin-top: 3px;
+    }
+    .pic{
+        width: 350px;
+        height: auto;
+        display: flex;
+        margin-left: 500px;
+        margin-bottom: 20px;
+        justify-content: center;
+        text-align: center;
+    
+    }
+</style>
+
+
+
+<body>
+
+    <video class="vid-bg" autoplay loop muted>
+        <source src="vid.mp4" type="video/mp4">
+    </video>
+
+    <h1 class="head">Make Your Guess</h1>
+    <div class="container">
+
+        <div class="dice">
+            <p class="Guess1">DICE 1 </p>
+            <img class="img1" src="dice6.png">
+        </div>
+
+        <div class="dice">
+            <p class="Guess2">DICE 2</p>
+            <img class="img2" src="dice6.png">
+        </div>
+        <div class="pic">
+            <img id="result">
+        </div>
+        
+    </div>
+
+    <div class="container bottom">
+        <button type="button" class="btn" onClick="rollTheDice()">
+            Roll the Dice
+        </button>
+    </div>
+
+
+    <script>
+
+        function rollTheDice() {
+            setTimeout(function () {
+                var roll_1 = Math.floor(Math.random() * 6) + 1;
+                var roll_2 = Math.floor(Math.random() * 6) + 1;
+                document.querySelector(".img1").setAttribute("src",
+                    "dice" + roll_1 + ".png");
+
+                document.querySelector(".img2").setAttribute("src",
+                    "dice" + roll_2 + ".png");
+                result = [];
+                console.log(roll_1, roll_2);
+                var u_1 = window.prompt("Enter a number between 1 to 6");
+                var u_2 = window.prompt("Enter a number between 1 to 6");
+                if (u_1 == u_2) {
+                    if (u_1 == roll_1 || u_1 == roll_2) {
+                        result.push(u_1);
+                        }
+                        if (roll_1 == roll_2) {
+                            result.push(u_1);
+                    }
+                }
+                else {
+                    if (u_1 == roll_1 || u_1 == roll_2) {
+                        result.push(u_1);
+                    }
+
+                    if (u_2 == roll_1 || u_2 == roll_2) {
+                        result.push(u_2);
+                    }
+
+                }
+                var output = result.length;
+                if (output == 0) {
+                    document.getElementById("result").setAttribute("src","lose.gif");
+                    document.querySelector("h1").innerHTML = ("Your Guesses were " + u_1 + " and " + u_2);
+                }
+                else if (output == 1) {
+                    document.getElementById("result").setAttribute("src","one.gif");
+                    document.querySelector("h1").innerHTML = ("Your Guesses were " + u_1 + " and " + u_2);
+                }
+                else {
+                    document.getElementById("result").setAttribute("src","win.gif");
+                    document.querySelector("h1").innerHTML = ("Your Guesses were " + u_1 + " and " + u_2);
+                }
+            }, 2500);
+        }
+    </script>
+
+
+
+
+</body>
+
+</html>
